@@ -6,7 +6,7 @@
 ## Установка
 1. Клонируйте репозиторий
 ```bash
-git clone <[[ссылка_на_репозиторий]](https://github.com/galanovaxxx/Lab-2-)>
+git clone <[ссылка_на_репозиторий](https://github.com/galanovaxxx/Lab-2-)>
 ```
 2. Перейдите в директорию проекта
 ```bash
