@@ -6,7 +6,7 @@ from logging import getLogger
 logger = getLogger(__name__)
 
 
-def mv_function(user_input: list) -> None:
+def mv_function(user_input: list) -> bool:
     """
         Функция для перемещения или переименования файлов и директорий
     """
@@ -56,3 +56,4 @@ def mv_function(user_input: list) -> None:
     else:  # Обработка ошибок, если файла не существует
         logger.info('no such file')
         raise FileNotFoundError('no such file')
+    return True
