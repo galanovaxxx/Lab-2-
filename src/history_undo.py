@@ -3,6 +3,7 @@ import os
 from cp import cp_function
 from mv import mv_function
 from rm import rm_function
+from cd import cd_function
 from logging import getLogger
 
 logger = getLogger(__name__)
@@ -43,7 +44,10 @@ def history_function(s: list) -> None:
 
 def undo_function(last: list) -> None:
     if last[0] == 'cp':
+        current_dir = os.getcwd()
+        cd_function(['cd', f'{last[-1]}'])
         rm_function(['rm', f'{last[1]}'])
+        cd_function(['cd', f'{current_dir}'])
         logger.info("undo")
     elif last[0] == 'mv':
         mv_function([last[0], last[1], last[2]])
