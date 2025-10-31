@@ -50,7 +50,10 @@ def undo_function(last: list) -> None:
         cd_function(['cd', f'{current_dir}'])
         logger.info("undo")
     elif last[0] == 'mv':
-        mv_function([last[0], last[1], last[2]])
+        current_dir = os.getcwd()
+        cd_function(['cd', f'{last[-1]}'])
+        mv_function([last[0], last[1], current_dir])
+        cd_function(['cd', f'{current_dir}'])
         logger.info("undo")
     elif last[0] == 'rm':
         cp_function(['cp', os.path.join('.trash', f'{trash_history[-1]}'), last[-1]])
@@ -61,3 +64,4 @@ def undo_function(last: list) -> None:
         raise ValueError(f'undo: unrecognized option')
     history.pop(-1)
     cp_mv_rm.pop(-1)
+
