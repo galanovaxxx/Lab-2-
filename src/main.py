@@ -49,7 +49,7 @@ def main() -> None:
                 if s[0] == 'mv':
                     mv = mv_function(s)
                     if mv:
-                        cp_mv_rm.append(s[:-1] + [os.getcwd()])
+                        cp_mv_rm.append(s)
                     append_history(s, l)
                 if s[0] == 'rm':
                     append_history(s, l)
