@@ -1,5 +1,5 @@
 import pytest
-from ls import ls_function
+from src.ls import ls_function
 from unittest.mock import patch, call
 import os
 import stat
