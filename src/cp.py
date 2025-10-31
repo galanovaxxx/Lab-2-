@@ -27,6 +27,7 @@ def cp_function(user_input: list) -> None:
             path1 = i
         else:  # Запоминает целевой путь
             path2 = i
+    #print(path1)
     if os.path.exists(path1):  # Проверка существования исходного файла/директории
         if r_mode == False and os.path.isfile(path1) and os.path.exists(path2):
             """ Обработка простого копирования файла """
@@ -41,3 +42,4 @@ def cp_function(user_input: list) -> None:
     else:  # Обрабатывает случай несуществующего исходного файла
         logger.error('no such file')
         raise FileNotFoundError('no such file')
+    return True
