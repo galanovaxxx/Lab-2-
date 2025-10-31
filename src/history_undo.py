@@ -49,11 +49,11 @@ def undo_function(last: list) -> None:
         mv_function([last[0], last[1], last[2]])
         logger.info("undo")
     elif last[0] == 'rm':
-        cp_function(['rm', os.path.join('.trash', f'{trash_history[-1]}'), os.getcwd()])
+        cp_function(['cp', os.path.join('.trash', f'{trash_history[-1]}'), last[-1]])
         trash_history.pop(-1)
         logger.info("undo")
     else:
-        logger.error(f'undo: unrecognized option "{' '.join(last)}"')
-        raise ValueError(f'undo: unrecognized option "{' '.join(last)}"')
+        logger.error(f'undo: unrecognized option')
+        raise ValueError(f'undo: unrecognized option')
     history.pop(-1)
     cp_mv_rm.pop(-1)
