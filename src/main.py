@@ -42,15 +42,15 @@ def main() -> None:
                     append_history(s, l)
                     cat_function(s)
                 if s[0] == 'cp':
-                    if cp_function(s):
+                    cp = cp_function(s)
+                    if cp:
                         cp_mv_rm.append(s)
                     append_history(s, l)
-                    cp_function(s)
                 if s[0] == 'mv':
-                    if mv_function(s):
+                    mv = mv_function(s)
+                    if mv:
                         cp_mv_rm.append(s[:-1] + [os.getcwd()])
                     append_history(s, l)
-                    mv_function(s)
                 if s[0] == 'rm':
                     append_history(s, l)
                     temp = rm_function(s)
@@ -81,5 +81,6 @@ def main() -> None:
                 print('no permission to read the file')
             except UnicodeDecodeError:
                 print('failed to decode the file')
+
 
 main()
