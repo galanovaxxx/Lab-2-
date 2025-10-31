@@ -63,3 +63,4 @@ def rm_function(user_input: list) -> None:
         else:  # Обработка случая несуществующей директории
             logger.error('no such directory')
             raise FileNotFoundError('no such directory')
+    return True
