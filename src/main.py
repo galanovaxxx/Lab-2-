@@ -53,8 +53,9 @@ def main() -> None:
                     mv_function(s)
                 if s[0] == 'rm':
                     append_history(s, l)
-                    rm_function(s)
-                    if rm_function(s):
+                    temp = rm_function(s)
+                    if temp:
+                        s = s + [os.getcwd()]
                         cp_mv_rm.append(s)
                         trash_history.append(s[1])
                 if s[0] == 'zip' or s[0] == 'tar':
@@ -81,6 +82,4 @@ def main() -> None:
             except UnicodeDecodeError:
                 print('failed to decode the file')
 
-
-if __name__ == "__main__":
-    main()
+main()
