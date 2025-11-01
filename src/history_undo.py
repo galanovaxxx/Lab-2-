@@ -31,15 +31,15 @@ def history_function(s: list) -> None:
                     print(history[i])
             logger.info(f"{' '.join(s)}")
         except Exception:
-            logger.error(f'history: unrecognized option "{' '.join(s[1:])}"')
-            raise ValueError(f'history: unrecognized option "{' '.join(s[1:])}"')
+            logger.error(f'history: unrecognized option')
+            raise ValueError(f'history: unrecognized option')
     elif len(s) == 1:
         logger.info(f"{' '.join(s)}")
         for i in s:
             print(i)
     else:
-        logger.error(f'history: unrecognized option "{' '.join(s[1:])}"')
-        raise ValueError(f'history: unrecognized option "{' '.join(s[1:])}"')
+        logger.error(f'history: unrecognized option')
+        raise ValueError(f'history: unrecognized option')
 
 
 def undo_function(last: list) -> None:
