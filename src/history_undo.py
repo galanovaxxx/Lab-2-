@@ -29,7 +29,7 @@ def history_function(s: list) -> None:
             elif s[1] >= 0:
                 for i in range(-s[1], 0):
                     print(history[i])
-            logger.info(f"{' '.join(s)}")
+            logger.info(f"{s}")
         except Exception:
             logger.error(f'history: unrecognized option')
             raise ValueError(f'history: unrecognized option')
