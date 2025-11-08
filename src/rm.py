@@ -1,12 +1,12 @@
 import os
 import shutil
-import logging
+from pathlib import Path
 from logging import getLogger
 
 logger = getLogger(__name__)
 
 
-def rm_function(user_input: list) -> None:
+def rm_function(user_input: list) -> bool:
     """
         Функция для удаления файлов и директорий
     """
@@ -23,6 +23,17 @@ def rm_function(user_input: list) -> None:
         else:  # Обрабатывает ошибку, если есть лишние аргументы
             logger.error(f'rm: unrecognized option "{' '.join(user_input[1:])}"')
             raise ValueError(f'rm: unrecognized option "{' '.join(user_input[1:])}"')
+    target = Path(path).resolve()
+    if target == target.anchor: # Проверка на корневой каталог
+        logger.error('can`t remove root directory')
+        raise ValueError(f"Запрещено удалять корневой каталог: {target} (anchor: {target.anchor})")
+    cwd_parent = Path.cwd().parent.resolve()
+    if target == cwd_parent: # Проверка на родительский каталог (..)
+        logger.error('can`t remove parent directory')
+        raise ValueError(f"Запрещено удалять родительский каталог: {target}")
+    if target.is_relative_to(cwd_parent) and target != cwd_parent: # Доп проверка: не позволяем удалять каталоги выше CWD
+        logger.error('can`t remove parent directory')
+        raise ValueError(f"Запрещено удалять каталоги выше текущего рабочего каталога: {target}")
     if r_mode == False:
         """ Обработка простого удаления файла """
         if os.path.exists(path) and os.path.isfile(path):  # Проверяет существование и тип файла
