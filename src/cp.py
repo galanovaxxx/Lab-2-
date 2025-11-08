@@ -6,7 +6,7 @@ from logging import getLogger
 logger = getLogger(__name__)
 
 
-def cp_function(user_input: list) -> None:
+def cp_function(user_input: list) -> bool:
     """
         Функция для копирования файлов и директорий
     """
@@ -27,7 +27,6 @@ def cp_function(user_input: list) -> None:
             path1 = i
         else:  # Запоминает целевой путь
             path2 = i
-    #print(path1)
     if os.path.exists(path1):  # Проверка существования исходного файла/директории
         if r_mode == False and os.path.isfile(path1) and os.path.exists(path2):
             """ Обработка простого копирования файла """

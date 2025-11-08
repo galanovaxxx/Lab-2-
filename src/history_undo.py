@@ -44,24 +44,43 @@ def history_function(s: list) -> None:
 
 def undo_function(last: list) -> None:
     if last[0] == 'cp':
-        current_dir = os.getcwd()
-        cd_function(['cd', f'{last[-1]}'])
-        rm_function(['rm', f'{last[1]}'])
-        cd_function(['cd', f'{current_dir}'])
-        logger.info("undo")
+        path1 = ''
+        path2 = ''
+        path3 = ''
+        for i in last:
+            if i != 'cp' and i != '-r':
+                if len(path1) == 0:
+                    path1 = i
+                elif len(path2) == 0:
+                    path2 = i
+                elif len(path3) == 0:
+                    path3 = i
+        cd_function(['cd', path2])
+        rm_function(['rm', path1])
+        cd_function(['cd', path3])
+        logger.info("undo for cp")
     elif last[0] == 'mv':
-        current_dir = os.getcwd()
-        cd_function(['cd', f'{last[-1]}'])
-        mv_function([last[0], last[1], current_dir])
-        cd_function(['cd', f'{current_dir}'])
-        logger.info("undo")
+        path1 = ''
+        path2 = ''
+        path3 = ''
+        for i in last:
+            if i != 'mv':
+                if len(path1) == 0:
+                    path1 = i
+                elif len(path2) == 0:
+                    path2 = i
+                elif len(path3) == 0:
+                    path3 = i
+        cd_function(['cd', path2])
+        mv_function(['mv', path1, path3])
+        cd_function(['cd', path3])
+        logger.info("undo for mv")
     elif last[0] == 'rm':
         cp_function(['cp', os.path.join('.trash', f'{trash_history[-1]}'), last[-1]])
         trash_history.pop(-1)
-        logger.info("undo")
+        logger.info("undo for rm")
     else:
         logger.error(f'undo: unrecognized option')
         raise ValueError(f'undo: unrecognized option')
-    history.pop(-1)
     cp_mv_rm.pop(-1)
 

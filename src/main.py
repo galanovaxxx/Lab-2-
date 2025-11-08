@@ -35,44 +35,48 @@ def main() -> None:
                 if s[0] == 'ls':
                     append_history(s, l)
                     ls_function(s)
-                if s[0] == 'cd':
+                elif s[0] == 'cd':
                     append_history(s, l)
                     cd_function(s)
-                if s[0] == 'cat':
+                elif s[0] == 'cat':
                     append_history(s, l)
                     cat_function(s)
-                if s[0] == 'cp':
+                elif s[0] == 'cp':
+                    append_history(s, l)
                     cp = cp_function(s)
                     if cp:
+                        s = s + [os.getcwd()]
                         cp_mv_rm.append(s)
+                elif s[0] == 'mv':
                     append_history(s, l)
-                if s[0] == 'mv':
                     mv = mv_function(s)
                     if mv:
+                        s = s + [os.getcwd()]
                         cp_mv_rm.append(s)
+                elif s[0] == 'rm':
                     append_history(s, l)
-                if s[0] == 'rm':
-                    append_history(s, l)
-                    temp = rm_function(s)
-                    if temp:
+                    rm = rm_function(s)
+                    if rm:
                         s = s + [os.getcwd()]
                         cp_mv_rm.append(s)
                         trash_history.append(s[1])
-                if s[0] == 'zip' or s[0] == 'tar':
+                elif s[0] == 'zip' or s[0] == 'tar':
                     append_history(s, l)
                     zip_tar_function(s)
-                if s[0] == 'unzip' or s[0] == 'untar':
+                elif s[0] == 'unzip' or s[0] == 'untar':
                     append_history(s, l)
                     unzip_untar_function(s)
-                if s[0] == 'history' and len(s) <= 2:
+                elif s[0] == 'history' and len(s) <= 2:
                     append_history(s, l)
                     history_function(s)
-                if s[0] == 'undo' and len(s) == 1:
+                elif s[0] == 'undo' and len(s) == 1:
                     append_history(s, l)
                     undo_function(cp_mv_rm[-1])
-                if s[0] == 'grep':
+                elif s[0] == 'grep':
                     append_history(s, l)
                     grep_function(s)
+                else:
+                    print('command not found')
             except FileNotFoundError:
                 print('no such file or directory')
             except ValueError:
@@ -82,5 +86,5 @@ def main() -> None:
             except UnicodeDecodeError:
                 print('failed to decode the file')
 
-
-main()
+if __name__ == '__main__':
+    main()
