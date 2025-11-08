@@ -4,6 +4,8 @@ from datetime import datetime
 import logging
 from logging import getLogger
 
+from src.my_errors import DirectoryNotFoundError
+
 logger = getLogger(__name__)
 
 
@@ -47,4 +49,4 @@ def ls_function(user_input: list) -> None:
             logger.info(f"{' '.join(user_input)}")
     else:  # Обрабатывает случай несуществующей директории
         logger.error('no such directory')
-        raise FileNotFoundError('no such directory')
+        raise DirectoryNotFoundError('no such directory')

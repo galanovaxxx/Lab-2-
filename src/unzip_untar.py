@@ -5,6 +5,8 @@ import tarfile
 
 from logging import getLogger
 
+from src.my_errors import DirectoryNotFoundError
+
 logger = getLogger(__name__)
 
 
@@ -55,4 +57,4 @@ def unzip_untar_function(user_input):
     else:
         # Обрабатывает случай несуществующего файла
         logger.error('no such directory')
-        raise FileNotFoundError('no such directory')
+        raise DirectoryNotFoundError('no such directory')

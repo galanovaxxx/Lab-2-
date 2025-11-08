@@ -1,5 +1,6 @@
 import os
 from logging import getLogger
+from my_errors import DirectoryNotFoundError
 
 logger = getLogger(__name__)
 
@@ -29,4 +30,4 @@ def cd_function(user_input: list) -> None:
             logger.info(f"{' '.join(user_input)}")
     elif len(path) > 0:  # Обрабатывает случай несуществующей директории
         logger.error('no such directory')
-        raise FileNotFoundError('no such directory')
+        raise DirectoryNotFoundError('no such directory')

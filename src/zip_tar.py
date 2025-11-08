@@ -4,6 +4,8 @@ import zipfile
 import tarfile
 from logging import getLogger
 
+from src.my_errors import DirectoryNotFoundError
+
 logger = getLogger(__name__)
 
 
@@ -59,4 +61,4 @@ def zip_tar_function(user_input: list) -> None:
 
     else:  # Обрабатывает случай несуществующей директории
         logger.error('no such directory')
-        raise FileNotFoundError('no such directory')
+        raise DirectoryNotFoundError('no such directory')

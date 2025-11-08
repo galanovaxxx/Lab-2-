@@ -3,6 +3,8 @@ import shutil
 from pathlib import Path
 from logging import getLogger
 
+from src.my_errors import DirectoryNotFoundError
+
 logger = getLogger(__name__)
 
 
@@ -73,5 +75,5 @@ def rm_function(user_input: list) -> bool:
                 logger.info(f"directory {path} was not deleted")
         else:  # Обработка случая несуществующей директории
             logger.error('no such directory')
-            raise FileNotFoundError('no such directory')
+            raise DirectoryNotFoundError('no such directory')
     return True

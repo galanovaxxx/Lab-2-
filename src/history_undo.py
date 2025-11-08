@@ -83,4 +83,3 @@ def undo_function(last: list) -> None:
         logger.error(f'undo: unrecognized option')
         raise ValueError(f'undo: unrecognized option')
     cp_mv_rm.pop(-1)
-
