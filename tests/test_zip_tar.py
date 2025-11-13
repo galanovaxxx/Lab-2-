@@ -4,13 +4,13 @@ from src.zip_tar import zip_tar_function
 from pathlib import Path
 from src.my_errors import DirectoryNotFoundError
 
-class TestZipTar:
 
+class TestZipTar:
     def test_tar_success(self):
         with patch('os.path.isdir', return_value=True), \
-             patch('os.access', return_value=True), \
-             patch('tarfile.open') as mock_tar, \
-             patch('builtins.print') as mock_print:
+                patch('os.access', return_value=True), \
+                patch('tarfile.open') as mock_tar, \
+                patch('builtins.print') as mock_print:
             tar_mock = MagicMock()
             mock_tar.return_value.__enter__.return_value = tar_mock
             zip_tar_function(['tar', '/dir', 'archive.tar.gz'])
@@ -24,7 +24,7 @@ class TestZipTar:
 
     def test_no_permission(self):
         with patch('os.path.isdir', return_value=True), \
-             patch('os.access', side_effect=[False, False]):
+                patch('os.access', side_effect=[False, False]):
             with pytest.raises(PermissionError, match='no permission to read the dir: /dir'):
                 zip_tar_function(['zip', '/dir', 'archive.zip'])
 
@@ -34,15 +34,15 @@ class TestZipTar:
 
     def test_zip_exception(self):
         with patch('os.path.isdir', return_value=True), \
-             patch('os.access', return_value=True), \
-             patch('os.walk', return_value=[('/dir', [], ['a.txt'])]), \
-             patch('zipfile.ZipFile', side_effect=Exception("fail")):
+                patch('os.access', return_value=True), \
+                patch('os.walk', return_value=[('/dir', [], ['a.txt'])]), \
+                patch('zipfile.ZipFile', side_effect=Exception("fail")):
             with pytest.raises(ValueError, match='zip: unrecognized option'):
                 zip_tar_function(['zip', '/dir', 'archive.zip'])
 
     def test_tar_exception(self):
         with patch('os.path.isdir', return_value=True), \
-             patch('os.access', return_value=True), \
-             patch('tarfile.open', side_effect=Exception("fail")):
+                patch('os.access', return_value=True), \
+                patch('tarfile.open', side_effect=Exception("fail")):
             with pytest.raises(ValueError, match='tar: unrecognized option'):
                 zip_tar_function(['tar', '/dir', 'archive.tar.gz'])
