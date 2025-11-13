@@ -35,7 +35,7 @@ def cat_function(user_input: list) -> None:
                         logger.info(f"{' '.join(user_input)}")
                 except Exception:  # Обрабатывает ошибки декодирования файла
                     logger.error('failed to decode the file')
-                    raise UnicodeDecodeError('failed to decode the file')
+                    raise UnicodeError('failed to decode the file')
         else:  # Обрабатывает случай, когда файл не существует
             logger.error('no such file')
             raise FileNotFoundError('no such file')

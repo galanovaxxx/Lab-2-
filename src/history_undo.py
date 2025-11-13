@@ -1,9 +1,9 @@
 import logging
 import os
-from cp import cp_function
-from mv import mv_function
-from rm import rm_function
-from cd import cd_function
+from src.cp import cp_function
+from src.mv import mv_function
+from src.rm import rm_function
+from src.cd import cd_function
 from logging import getLogger
 
 logger = getLogger(__name__)
@@ -20,7 +20,7 @@ def append_history(s, k: [list, int]) -> None:
 
 
 def history_function(s: list) -> None:
-    if s[1]:
+    if len(s) == 2:
         try:
             s[1] = int(s[1])
             if s[1] > len(history):
@@ -35,7 +35,7 @@ def history_function(s: list) -> None:
             raise ValueError(f'history: unrecognized option')
     elif len(s) == 1:
         logger.info(f"{' '.join(s)}")
-        for i in s:
+        for i in history:
             print(i)
     else:
         logger.error(f'history: unrecognized option')

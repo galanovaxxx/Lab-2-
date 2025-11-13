@@ -13,7 +13,7 @@ from unzip_untar import unzip_untar_function
 from grep import grep_function
 from history_undo import undo_function, history_function, append_history, cp_mv_rm, trash_history
 from tokenization import tokenization_function
-from my_errors import DirectoryNotFoundError
+from src.my_errors import DirectoryNotFoundError
 
 """Настройка логгирования. Устанавливает параметры записи логов в файл с заданным форматом и кодировкой"""
 logging.basicConfig(level=logging.DEBUG, filemode='w', filename='shell.log', encoding='utf-8',
@@ -84,7 +84,7 @@ def main() -> None:
                 print('unrecognized option')
             except PermissionError:
                 print('no permission to read the file')
-            except UnicodeDecodeError:
+            except UnicodeError:
                 print('failed to decode the file')
             except DirectoryNotFoundError:
                 print('no such directory')

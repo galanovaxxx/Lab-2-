@@ -1,6 +1,6 @@
 import os
 from logging import getLogger
-from my_errors import DirectoryNotFoundError
+from src.my_errors import DirectoryNotFoundError
 
 logger = getLogger(__name__)
 
@@ -24,7 +24,7 @@ def cd_function(user_input: list) -> None:
         os.chdir(os.path.expanduser("~"))
         path = path[2:]
         logger.info(f"{' '.join(user_input)}")
-    if len(path) > 0 and os.path.exists(path):  # Проверяет существование директории и выполняет переход
+    if len(path) > 0 and os.path.isdir(path):  # Проверяет существование директории и выполняет переход
         os.chdir(path)
         if path[0] != '~':
             logger.info(f"{' '.join(user_input)}")

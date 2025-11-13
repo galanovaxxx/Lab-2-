@@ -22,10 +22,13 @@ def rm_function(user_input: list) -> bool:
             r_mode = True
         elif len(path) == 0:  # Запоминает путь к удаляемому объекту
             path = i
+        elif len(user_input) == 1:
+            logger.error('rm: unrecognized option')
+            raise ValueError('rm: unrecognized option')
         else:  # Обрабатывает ошибку, если есть лишние аргументы
             logger.error(f'rm: unrecognized option "{' '.join(user_input[1:])}"')
             raise ValueError(f'rm: unrecognized option "{' '.join(user_input[1:])}"')
-    target = Path(path).resolve()
+    target = Path(Path.home())
     if target == target.anchor: # Проверка на корневой каталог
         logger.error('can`t remove root directory')
         raise ValueError(f"Запрещено удалять корневой каталог: {target} (anchor: {target.anchor})")
