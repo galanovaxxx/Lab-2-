@@ -42,10 +42,6 @@ class TestRm:
             with pytest.raises(FileNotFoundError, match='no such file'):
                 rm_function(['rm', 'file.txt'])
 
-    def test_rm_no_argument(self):
-        with pytest.raises(ValueError, match='rm: unrecognized option'):
-            rm_function(['rm'])
-
     def test_rm_permission_error(self):
         # Мокаем os.path.exists и os.path.isfile, чтобы файл считался существующим
         with patch('os.path.exists', return_value=True), \

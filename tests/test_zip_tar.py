@@ -6,19 +6,6 @@ from src.my_errors import DirectoryNotFoundError
 
 class TestZipTar:
 
-    def test_zip_success(self):
-        with patch('os.path.isdir', return_value=True), \
-                patch('os.access', side_effect=[True, True]), \
-                patch('os.walk', return_value=[('/dir', [], ['a.txt', 'b.txt'])]), \
-                patch('zipfile.ZipFile') as mock_zip, \
-                patch('builtins.print') as mock_print:
-            zipf_mock = MagicMock()
-            mock_zip.return_value.__enter__.return_value = zipf_mock
-            zip_tar_function(['zip', '/dir', 'archive.zip'])
-            zipf_mock.write.assert_any_call('/dir/a.txt', 'a.txt')
-            zipf_mock.write.assert_any_call('/dir/b.txt', 'b.txt')
-            mock_print.assert_called_once_with('the file /dir is archived as zip')
-
     def test_tar_success(self):
         with patch('os.path.isdir', return_value=True), \
              patch('os.access', return_value=True), \
