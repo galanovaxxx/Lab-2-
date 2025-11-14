@@ -28,6 +28,10 @@ def rm_function(user_input: list) -> bool:
         else:  # Обрабатывает ошибку, если есть лишние аргументы
             logger.error(f'rm: unrecognized option "{' '.join(user_input[1:])}"')
             raise ValueError(f'rm: unrecognized option "{' '.join(user_input[1:])}"')
+    # Проверка на отсутствие пути после парсинга
+    if len(path) == 0:
+        logger.error('rm: unrecognized option')
+        raise ValueError('rm: unrecognized option')
     target = Path(Path.home())
     if target == target.anchor: # Проверка на корневой каталог
         logger.error('can`t remove root directory')

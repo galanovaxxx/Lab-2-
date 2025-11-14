@@ -2,6 +2,7 @@ import os
 import shutil
 import logging
 from logging import getLogger
+from src.my_errors import DirectoryNotFoundError
 
 logger = getLogger(__name__)
 
@@ -33,8 +34,8 @@ def cp_function(user_input: list) -> bool:
     # Копирование директории
     if os.path.isdir(path1):
         if not r_mode:
-            logger.error('cp: omitting directory (use -r flag)')
-            raise IsADirectoryError('cp: omitting directory (use -r flag)')
+            logger.error('no such directory')
+            raise DirectoryNotFoundError('no such directory')
         shutil.copytree(path1, path2)
         print(f'Рекурсивное копирование {path1} в {path2}.')
         logger.info(f"{' '.join(user_input)}")
